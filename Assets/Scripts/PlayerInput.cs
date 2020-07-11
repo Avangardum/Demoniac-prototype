@@ -26,5 +26,7 @@ public class PlayerInput : MonoBehaviour
         else if (goRight)
             playerMovement.CurrentXAction = PlayerMovement.XAction.GoRight;
         playerMovement.JumpPressed = Input.GetKey(jump);
+        if(Input.GetKeyDown(jump))
+        playerMovement.JumpDown = true;
     }
 }
