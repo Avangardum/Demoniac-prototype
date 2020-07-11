@@ -68,5 +68,6 @@ public class DemonInput : MonoBehaviour
     public void SetScenario(DemonScenario scenario)
     {
         scenarioElements = scenario.ToQueue();
+        timeSinceScenarioStart = 0;
     }
 }
