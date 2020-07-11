@@ -3,13 +3,20 @@
 public class PlayerMovement : MonoBehaviour
 {
     public XAction CurrentXAction;
+    public bool JumpPressed;
 
+    [SerializeField] private Transform feet;
     [SerializeField] private float maxXSpeed;
     [SerializeField] private float maxYSpeed;
+    [SerializeField] private float jumpSpeed;
     [SerializeField] private float breakAcceleration;
     [SerializeField] private float goAcceleration;
+    [SerializeField] private float groundedRayLength;
+    [SerializeField] private float maxJumpTime;
+    [SerializeField] private LayerMask groundedMask;
 
     private new Rigidbody2D rigidbody2D;
+    private float jumpTimeLeft;
 
     public enum XAction
     {
@@ -25,6 +32,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        XMovement();
+        YMovement();
+    }
+
+    private void XMovement()
+    {
         void Brake(ref Vector2 _velocity)
         {
             if (Mathf.Abs(_velocity.x) > breakAcceleration * Time.fixedDeltaTime)
@@ -34,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector2 velocity = rigidbody2D.velocity;
-        switch(CurrentXAction)
+        switch (CurrentXAction)
         {
             case XAction.Brake:
                 Brake(ref velocity);
@@ -56,6 +69,34 @@ public class PlayerMovement : MonoBehaviour
             velocity.x = maxXSpeed;
         if (velocity.x < -maxXSpeed)
             velocity.x = -maxXSpeed;
+        rigidbody2D.velocity = velocity;
+    }
+
+    private void YMovement()
+    {
+        Vector2 velocity = rigidbody2D.velocity;
+        if (jumpTimeLeft > 0)
+        {
+            if (JumpPressed)
+            {
+                velocity.y = jumpSpeed;
+                jumpTimeLeft -= Time.fixedDeltaTime;
+            }
+            else
+                jumpTimeLeft = 0;
+        }
+        else
+        {
+            if (JumpPressed)
+            {
+                bool isGrounded = Physics2D.Raycast(feet.position, Vector2.down, groundedRayLength, groundedMask).transform != null;
+                if(isGrounded)
+                {
+                    jumpTimeLeft = maxJumpTime;
+                    velocity.y = jumpSpeed;
+                }
+            }
+        }
         if (velocity.y > maxYSpeed)
             velocity.y = maxYSpeed;
         if (velocity.y < -maxYSpeed)

@@ -6,6 +6,7 @@ public class PlayerInput : MonoBehaviour
 {
     private const KeyCode left = KeyCode.A;
     private const KeyCode right = KeyCode.D;
+    private const KeyCode jump = KeyCode.Space;
 
     private PlayerMovement playerMovement;
 
@@ -24,5 +25,6 @@ public class PlayerInput : MonoBehaviour
             playerMovement.CurrentXAction = PlayerMovement.XAction.GoLeft;
         else if (goRight)
             playerMovement.CurrentXAction = PlayerMovement.XAction.GoRight;
+        playerMovement.JumpPressed = Input.GetKey(jump);
     }
 }
