@@ -16,6 +16,8 @@ public class InputSwitcher : MonoBehaviour
 
     public float playerControlTimeLeft { get; private set; }
 
+    public DemonScenario NextDemonScenario => scenarios[nextScenarioPointer];
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -50,7 +52,7 @@ public class InputSwitcher : MonoBehaviour
             if(playerControlTimeLeft <= 0)
             {
                 playerControlTimeLeft = 0;
-                EnableDemonInput(scenarios[nextScenarioPointer]);
+                EnableDemonInput(NextDemonScenario);
                 nextScenarioPointer++;
                 if (nextScenarioPointer >= scenarios.Length)
                     nextScenarioPointer = 0;

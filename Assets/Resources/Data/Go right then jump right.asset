@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77bdaed93bf408246b12d6838540b818, type: 3}
-  m_Name: DemonScenario
+  m_Name: Go right then jump right
   m_EditorClassIdentifier: 
   elements:
   - Timing: 0
