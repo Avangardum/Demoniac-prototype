@@ -2,31 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour
+public class DemonInput : MonoBehaviour
 {
-    private const KeyCode left = KeyCode.A;
-    private const KeyCode right = KeyCode.D;
-    private const KeyCode jump = KeyCode.Space;
-
     private PlayerMovement playerMovement;
+
+    private bool left;
+    private bool right;
+    private bool jump;
+    private bool previousFrameJump;
 
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        bool goLeft = Input.GetKey(left);
-        bool goRight = Input.GetKey(right);
-        if ((goLeft && goRight) || (!goLeft && !goRight))
+        if ((left && right) || (!left && !right))
             playerMovement.CurrentXAction = PlayerMovement.XAction.Brake;
-        else if (goLeft)
+        else if (left)
             playerMovement.CurrentXAction = PlayerMovement.XAction.GoLeft;
-        else if (goRight)
+        else if (right)
             playerMovement.CurrentXAction = PlayerMovement.XAction.GoRight;
-        playerMovement.JumpPressed = Input.GetKey(jump);
-        if(Input.GetKeyDown(jump))
+
+        playerMovement.JumpPressed = jump;
+        if (jump && !previousFrameJump)
             playerMovement.JumpDown = true;
+
+        previousFrameJump = jump;
     }
 }
