@@ -11,20 +11,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float maxXSpeed;
     [SerializeField] private float maxYSpeed;
     [SerializeField] private float jumpSpeed;
+    [SerializeField] private float dashSpeed;
     [SerializeField] private float breakAcceleration;
     [SerializeField] private float goAcceleration;
     [SerializeField] private float jumpInhibitionAcceleration;
     [SerializeField] private float groundedRayLength;
     [SerializeField] private float touchingCeilingRayLength;
     [SerializeField] private float maxJumpTime;
+    [SerializeField] private float dashTime;
     [SerializeField] private float coyoteTime;
     [SerializeField] private float jumpDownBufferTime;
     [SerializeField] private LayerMask groundedMask;
 
     private new Rigidbody2D rigidbody2D;
+    private Vector2 dashDirection;
     private float jumpTimeLeft;
     private float coyoteTimeLeft;
     private float jumpDownBufferTimeLeft;
+    private float dashTimeLeft;
     private bool isGrounded;
     private bool isTouchingCeiling;
 
@@ -42,12 +46,28 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        IsGroundedCheck();
-        IsTouchingCeilingCheck();
-        CoyoteTimeManagement();
-        JumpDownBufferTimeManagement();
-        XMovement();
-        YMovement();
+        if (dashTimeLeft > 0)
+        {
+            rigidbody2D.velocity = dashDirection.normalized * dashSpeed;
+            dashTimeLeft -= Time.fixedDeltaTime;
+            if (dashTimeLeft < 0)
+                dashTimeLeft = 0;
+        }
+        else
+        {
+            IsGroundedCheck();
+            IsTouchingCeilingCheck();
+            CoyoteTimeManagement();
+            JumpDownBufferTimeManagement();
+            XMovement();
+            YMovement();
+        }
+    }
+
+    public void Dash(Vector2 direction)
+    {
+        dashDirection = direction;
+        dashTimeLeft = dashTime;
     }
 
     private void IsGroundedCheck()

@@ -3,5 +3,9 @@
     None,
     Left,
     Right,
-    Jump
+    Jump,
+    DashLeft,
+    DashRight,
+    DashUp,
+    DashDown
 }

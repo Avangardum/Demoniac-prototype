@@ -252,12 +252,14 @@ MonoBehaviour:
   maxXSpeed: 3
   maxYSpeed: 10
   jumpSpeed: 5
+  dashSpeed: 10
   breakAcceleration: 10
   goAcceleration: 5
   jumpInhibitionAcceleration: 20
   groundedRayLength: 0.02
   touchingCeilingRayLength: 0.02
   maxJumpTime: 0.3
+  dashTime: 0.3
   coyoteTime: 0.15
   jumpDownBufferTime: 0.15
   groundedMask:

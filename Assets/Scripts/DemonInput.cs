@@ -12,6 +12,11 @@ public class DemonInput : MonoBehaviour
     private bool left;
     private bool right;
     private bool jump;
+    private bool dashLeft;
+    private bool dashRight;
+    private bool dashUp;
+    private bool dashDown;
+
     private bool previousFrameJump;
 
     private void Awake()
@@ -27,6 +32,10 @@ public class DemonInput : MonoBehaviour
             left = false;
             right = false;
             jump = false;
+            dashLeft = false;
+            dashRight = false;
+            dashUp = false;
+            dashDown = false;
             inputSwitcher.EnablePlayerInput();
         }
         else
@@ -46,6 +55,18 @@ public class DemonInput : MonoBehaviour
                     case DemonButton.Jump:
                         jump = press;
                         break;
+                    case DemonButton.DashLeft:
+                        dashLeft = press;
+                        break;
+                    case DemonButton.DashRight:
+                        dashRight = press;
+                        break;
+                    case DemonButton.DashUp:
+                        dashUp = press;
+                        break;
+                    case DemonButton.DashDown:
+                        dashDown = press;
+                        break;
                 }
             }
         }
@@ -60,6 +81,24 @@ public class DemonInput : MonoBehaviour
         playerMovement.JumpPressed = jump;
         if (jump && !previousFrameJump)
             playerMovement.JumpDown = true;
+
+        if(dashLeft || dashRight || dashUp || dashDown)
+        {
+            Vector2 dashDirection = Vector2.zero;
+            if (dashLeft)
+                dashDirection += Vector2.left;
+            if (dashRight)
+                dashDirection += Vector2.right;
+            if (dashUp)
+                dashDirection += Vector2.up;
+            if (dashDown)
+                dashDirection += Vector2.down;
+            playerMovement.Dash(dashDirection);
+            dashLeft = false;
+            dashRight = false;
+            dashUp = false;
+            dashDown = false;
+        }
 
         previousFrameJump = jump;
         timeSinceScenarioStart += Time.fixedDeltaTime;
