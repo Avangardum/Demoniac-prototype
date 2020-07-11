@@ -28,7 +28,10 @@ public class DemonScenarioEditor : Editor
             GUILayout.EndHorizontal();
         }
         foreach (var element in forDeletion)
+        {
             _target.Delete(element);
+            EditorUtility.SetDirty(_target);
+        }
 
         GUILayout.Space(10);
 
@@ -38,6 +41,9 @@ public class DemonScenarioEditor : Editor
             newButton = (DemonButton)EditorGUILayout.EnumPopup(newButton);
         GUILayout.EndHorizontal();
         if (GUILayout.Button("Add"))
+        {
             _target.Add(new DemonScenarioElement { Timing = newTiming, Button = newButton, ButtonAction = newButtonAction });
+            EditorUtility.SetDirty(_target);
+        }
     }
 }

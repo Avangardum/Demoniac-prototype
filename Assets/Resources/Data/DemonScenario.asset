@@ -14,20 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elements:
   - Timing: 0
-    Button: 0
-    ButtonAction: 1
-  - Timing: 2
-    Button: 0
-    ButtonAction: 0
-  - Timing: 2
-    Button: 1
-    ButtonAction: 1
-  - Timing: 3
     Button: 2
     ButtonAction: 1
-  - Timing: 4
-    Button: 1
+  - Timing: 1
+    Button: 3
+    ButtonAction: 1
+  - Timing: 1.5
+    Button: 3
     ButtonAction: 0
-  - Timing: 4
+  - Timing: 2
     Button: 2
     ButtonAction: 0
