@@ -16,3 +16,18 @@ MonoBehaviour:
   - Name: Go right then jump right
     Scenario: {fileID: 11400000, guid: a5e9fcecff020694aa86e7e99fb606b7, type: 2}
     Image: {fileID: 21300000, guid: 17a28e5d4942e754a8039777f5157c65, type: 3}
+  - Name: Jump
+    Scenario: {fileID: 11400000, guid: 5f7e3236528ac2243a77af9d7aa3c831, type: 2}
+    Image: {fileID: 21300000, guid: 4dcb42e0e7e998d43a50113065e6c7af, type: 3}
+  - Name: Dash up
+    Scenario: {fileID: 11400000, guid: 6d9ff3a2436099f48b0158851446abd7, type: 2}
+    Image: {fileID: 21300000, guid: 31967e87a996cc94d9a48d2f31b1f408, type: 3}
+  - Name: Dash right
+    Scenario: {fileID: 11400000, guid: b071a2dbb533ffb42b6d35a96d2c5b41, type: 2}
+    Image: {fileID: 21300000, guid: 16c72c738c6608c49b5767318b209935, type: 3}
+  - Name: Dash down
+    Scenario: {fileID: 11400000, guid: c271680067fddd243949c398dfef1a93, type: 2}
+    Image: {fileID: 21300000, guid: d395070f29196b449948ef65a78a99a1, type: 3}
+  - Name: Dash left
+    Scenario: {fileID: 11400000, guid: 6e49bebd11af6434faaf68d1a0072153, type: 2}
+    Image: {fileID: 21300000, guid: 0a4f01a3d95e1674a9f272a6ae906203, type: 3}

@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DemonScenario", menuName = "DemonScenario")]
 public class DemonScenario : ScriptableObject, IEnumerable<DemonScenarioElement>
 {
-    [SerializeField] private List<DemonScenarioElement> elements;
+    [SerializeField] private List<DemonScenarioElement> elements = new List<DemonScenarioElement>();
 
     public DemonScenarioElement this[int index] => elements[index];
 
