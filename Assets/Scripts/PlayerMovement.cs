@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Transform[] feet;
     [SerializeField] private Transform[] headMarkers;
+    [SerializeField] private Sprite idle;
+    [SerializeField] private Sprite walk;
     [SerializeField] private float maxXSpeed;
     [SerializeField] private float maxYSpeed;
     [SerializeField] private float jumpSpeed;
@@ -61,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
             JumpDownBufferTimeManagement();
             XMovement();
             YMovement();
+            SpriteManagement();
         }
     }
 
@@ -191,5 +194,18 @@ public class PlayerMovement : MonoBehaviour
         if (velocity.y < -maxYSpeed)
             velocity.y = -maxYSpeed;
         rigidbody2D.velocity = velocity;
+    }
+
+    private void SpriteManagement()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (rigidbody2D.velocity.x == 0)
+            sr.sprite = idle;
+        else
+        {
+            sr.sprite = walk;
+            sr.flipX = rigidbody2D.velocity.x < 0;
+        }
+
     }
 }
